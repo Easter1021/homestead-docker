@@ -1,0 +1,10 @@
+---
+
+- src: f500.project_deploy
+  path: roles/
+
+- src: williamyeh.sudo-agent-forwarding
+  path: roles/
+
+- src: laggyluke.git
+  path: roles/

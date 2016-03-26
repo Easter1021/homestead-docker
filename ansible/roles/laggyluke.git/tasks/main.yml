@@ -1,0 +1,25 @@
+- name: install package
+  sudo: true
+  apt: pkg=git
+
+- name: add 'github.com' to /etc/ssh/ssh_known_hosts
+  sudo: true
+  lineinfile: >
+    dest=/etc/ssh/ssh_known_hosts
+    state=present
+    create=true
+    owner=root
+    group=root
+    mode=0644
+    line='{{ git.host_keys.github_com }}'
+
+- name: add 'bitbucket.org' to /etc/ssh/ssh_known_hosts
+  sudo: true
+  lineinfile: >
+    dest=/etc/ssh/ssh_known_hosts
+    state=present
+    create=true
+    owner=root
+    group=root
+    mode=0644
+    line='{{ git.host_keys.bitbucket_org }}'
