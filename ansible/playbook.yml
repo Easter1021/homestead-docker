@@ -1,0 +1,24 @@
+- name: Deploy actwg repo to Web Server
+  hosts: all
+  remote_user: root
+
+  vars:
+    - project_git_repo: git@github.com:Easter1021/homestead-docker.git
+    - project_root: /var/www/trubuzz_challenge
+    - project_deploy_strategy: git
+    - project_version: develop
+    - project_has_composer: True
+    - project_composer_binary: composer
+    - project_has_npm: True
+    - ansible_os_family: Debian
+    - project_shared_children:
+      - path: ".env"
+        src: ".env"
+        type: "file"
+    - project_post_build_commands:
+      - "composer dumpauto"
+
+  roles:
+     - williamyeh.sudo-agent-forwarding
+     - laggyluke.git
+     - f500.project_deploy
