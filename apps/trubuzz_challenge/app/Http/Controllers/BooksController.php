@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use Cmgmyr\Messenger\Models\Message;
+use Cmgmyr\Messenger\Models\Participant;
+use Cmgmyr\Messenger\Models\Thread;
+
 use App\Book;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -53,6 +57,16 @@ class BooksController extends Controller
         $book->save();
 
         Session::flash('flash_message', 'Book added!');
+
+        $book->load(['user', 'user.followed_users']);
+
+        // 通知
+        if($book->user and $book->user->followed_users->count()>0) {
+            $thread = Thread::create(['subject' => $book->user->username."剛才新增一本書囉。",]);
+            Message::create(['thread_id' => $thread->id,'user_id' => $book->user->id,'body' => "這本書名叫做".$book->title.'<br>內容：'.$book->description,]);
+            Participant::create(['thread_id' => $thread->id,'user_id' => $book->user->id,'last_read' => new Carbon,]);
+            $thread->addParticipants($book->user->followed_users->map(function ($item, $key) {return $item->id;})->toArray());
+        }
 
         if($request->route()->getPrefix() == '/api')
             return response()->json(($request->format)? ['data'=>$book] : $book);

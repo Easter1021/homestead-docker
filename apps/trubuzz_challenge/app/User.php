@@ -2,10 +2,13 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Cmgmyr\Messenger\Traits\Messagable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model
+class User extends Authenticatable
 {
+    use Messagable;
+    
     /**
      * The database table used by the model.
      *
@@ -19,6 +22,16 @@ class User extends Model
      * @var array
      */
     protected $fillable = ['username', 'email', 'created_time'];
+
+    public function attention_users()
+    {
+        return $this->belongsToMany('App\User', 'attentions', 'user_id', 'attention_user_id');
+    }
+
+    public function followed_users()
+    {
+        return $this->belongsToMany('App\User', 'attentions', 'attention_user_id', 'user_id');
+    }
 
     /**
      * 一個User可以擁有多個Book

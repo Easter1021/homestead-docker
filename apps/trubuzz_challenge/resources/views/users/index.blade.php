@@ -18,15 +18,17 @@
                     <td>{{ $x }}</td>
                     <td><a href="{{ url('users', $item->id) }}">{{ $item->username }}</a></td><td>{{ $item->email }}</td><td>{{ $item->created_time }}</td>
                     <td>
-                        <a href="{{ url('users/' . $item->id . '/edit') }}">
-                            <button type="submit" class="btn btn-primary btn-xs">Update</button>
-                        </a> /
+                        @include('users.attention') /
+                        @if(Auth::user()->id != $item->id)
+                        <a href="{{ url('login/' . $item->id) }}" class="btn btn-info btn-xs">登入</button></a> /
+                        @endif
+                        <a href="{{ url('users/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs">修改</button></a> /
                         {!! Form::open([
                             'method'=>'DELETE',
                             'url' => ['users', $item->id],
                             'style' => 'display:inline'
                         ]) !!}
-                            {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-xs']) !!}
+                            {!! Form::submit('刪除', ['class' => 'btn btn-danger btn-xs']) !!}
                         {!! Form::close() !!}
                     </td>
                 </tr>
@@ -35,5 +37,11 @@
         </table>
         <div class="pagination"> {!! $users->render() !!} </div>
     </div>
+
+    <script type="text/javascript">
+        $('body').on('ajax:success', '.attention', function(event, data, status, xhr) {
+           $(this).replaceWith( $(data) ); 
+        });
+    </script>
 
 @endsection

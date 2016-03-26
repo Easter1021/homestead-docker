@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('login/{users}', 'UsersController@login');
+Route::post('users/{users}/attention', 'UserAttentionsController@store')->middleware(['auth']);
+Route::delete('users/{users}/attention', 'UserAttentionsController@destroy')->middleware(['auth']);
 Route::resource('users', 'UsersController');
 Route::get('users/{users}/books', 'UserBooksController@index');
 Route::delete('users/{users}/books/{books}', 'UserBooksController@destroy');

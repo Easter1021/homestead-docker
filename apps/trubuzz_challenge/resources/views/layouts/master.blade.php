@@ -12,6 +12,9 @@
 			padding-top: 70px;
 		}
 	</style>
+
+	<script src="https://code.jquery.com/jquery-1.12.2.min.js" integrity="sha256-lZFHibXzMHo3GGeehn1hudTAP3Sc0uKXBXAzHX1sjtk=" crossorigin="anonymous"></script>
+	<script src="{{asset('js/rails.js')}}"></script>
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top">
@@ -29,12 +32,10 @@
 
 			<div class="collapse navbar-collapse" id="navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
-					@if (Auth::guest())
-						<li><a href="{{ url('/auth/login') }}">Login</a></li>
-						<li><a href="{{ url('/auth/register') }}">Register</a></li>
-					@else
-						<li><a href="#">{{ Auth::user()->name }}</a></li>
-						<li><a href="{{ url('/auth/logout') }}">Logout</a></li>
+					<li><a href="/users">登入其它人</a></li>
+					@if (Auth::check())
+						@include('messenger.unread-count')
+						<li><a href="#">{{ Auth::user()->username }}</a></li>
 					@endif
 				</ul>
 			</div>

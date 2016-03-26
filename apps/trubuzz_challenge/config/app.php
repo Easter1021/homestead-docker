@@ -158,6 +158,7 @@ return [
 
         Appzcoder\CrudGenerator\CrudGeneratorServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Cmgmyr\Messenger\MessengerServiceProvider::class,
 
     ],
 

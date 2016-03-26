@@ -8,11 +8,21 @@ use App\Http\Controllers\Controller;
 use Validator;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Session;
 
 class UsersController extends Controller
 {
+
+    public function login (Request $request, User $user) {
+        Auth::login($user);
+        return redirect('users');        
+    }
+
+    public function logout (Request $request) {
+        Auth::logout();
+    }
 
     /**
      * Display a listing of the resource.
