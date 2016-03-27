@@ -73,6 +73,13 @@ $ php artisan key:generate
 $ composer install
 ```
 
+資料填充 [https://laravel.tw/docs/5.1/seeding#writing-seeders](https://laravel.tw/docs/5.1/seeding#writing-seeders)
+
+```shell
+$ cd ~/homestead-docker/apps/trubuzz_challenge
+$ php artisan migrate:refresh --seed
+```
+
 ## 設定 virtual host
 
 在本機端編輯 /etc/hosts 加入 virtual host (以下為 Mac OS 環境)
