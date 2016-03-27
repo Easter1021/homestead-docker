@@ -10,19 +10,19 @@ web:
         - ~/.composer:/home/homestead/.composer # composer caching
         - ~/.gitconfig:/home/homestead/.gitconfig # Git configuration ( access alias && config )
         - ~/.ssh:/home/homestead/.ssh # Ssh keys for easy deployment inside the container
-        - ~/apps:/apps # all apps
-        - ~/apps/volumes/nginx/sites-available:/etc/nginx/sites-available # nginx sites ( in case you recreate the container )
-        - ~/apps/volumes/nginx/sites-enabled:/etc/nginx/sites-enabled # nginx sites ( in case you recreate the container )
+        - ~/homestead-docker/apps:/apps # all apps
+        - ~/homestead-docker/apps/volumes/nginx/sites-available:/etc/nginx/sites-available # nginx sites ( in case you recreate the container )
+        - ~/homestead-docker/apps/volumes/nginx/sites-enabled:/etc/nginx/sites-enabled # nginx sites ( in case you recreate the container )
     links:
-        - mariadb
+        - mysql
 
-mariadb:
-    image: tutum/mariadb
+mysql:
+    image: library/mysql
     restart: always
     ports:
         - "33060:3306"
     environment:
-        MARIADB_USER: admin # cannot be changed ( for info. only )
-        MARIADB_PASS: root
-    volumes:
-        - ~/apps/volumes/mysql:/var/lib/mysql # database files
+        MYSQL_ROOT_PASSWORD: trubuzz_challenge
+        MYSQL_DATABASE: trubuzz
+        MYSQL_USER: trubuzz
+        MYSQL_PASSWORD: challenge
