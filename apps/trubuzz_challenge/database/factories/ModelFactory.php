@@ -13,9 +13,15 @@
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
+        'username' => $faker->name,
         'email' => $faker->safeEmail,
-        'password' => bcrypt(str_random(10)),
-        'remember_token' => str_random(10),
+    ];
+});
+
+$factory->define(App\Book::class, function ($faker) {
+    return [
+        'title' => $faker->sentence(1),
+        'description' => join("\n\n", $faker->paragraphs(mt_rand(1, 3))),
+        'user_id' => mt_rand(1, 20),
     ];
 });
