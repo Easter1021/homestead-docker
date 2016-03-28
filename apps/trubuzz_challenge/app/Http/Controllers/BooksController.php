@@ -26,9 +26,8 @@ class BooksController extends Controller
     {
         $books = Book::paginate(15);
 
-        if($request->route()->getPrefix() == '/api')
-            return response()->json(($request->format)? ['data'=>$books] : $books);
-        return view('books.index', compact('books'));
+        $view = 'books.index';
+        return response()->taker(compact('books', 'view'));
     }
 
     /**
@@ -68,9 +67,8 @@ class BooksController extends Controller
             $thread->addParticipants($book->user->followed_users->map(function ($item, $key) {return $item->id;})->toArray());
         }
 
-        if($request->route()->getPrefix() == '/api')
-            return response()->json(($request->format)? ['data'=>$book] : $book);
-        return redirect('books');
+        $redirect = 'books';
+        return response()->taker(compact('book', 'redirect'));
     }
 
     /**
@@ -82,9 +80,8 @@ class BooksController extends Controller
      */
     public function show(Request $request, Book $book)
     {
-        if($request->route()->getPrefix() == '/api')
-            return response()->json(($request->format)? ['data'=>$book] : $book);
-        return view('books.show', compact('book'));
+        $view = 'books.show';
+        return response()->taker(compact('book', 'view'));
     }
 
     /**
@@ -112,9 +109,8 @@ class BooksController extends Controller
 
         Session::flash('flash_message', 'Book updated!');
 
-        if($request->route()->getPrefix() == '/api')
-            return response()->json(($request->format)? ['data'=>$book] : $book);
-        return redirect('books');
+        $redirect = 'books';
+        return response()->taker(compact('book', 'redirect'));
     }
 
     /**
@@ -130,15 +126,15 @@ class BooksController extends Controller
 
         Session::flash('flash_message', 'Book deleted!');
 
-        if($request->route()->getPrefix() == '/api')
-            return response()->json(($request->format)? ['data'=>['success'=>true]] : ['success'=>true]);
-        return redirect('books');
+        $success = true
+        $redirect = 'books';
+        return response()->taker(compact('success', 'redirect'));
     }
 
     public function user(Request $request, Book $book) {
-        if($request->route()->getPrefix() == '/api')
-            return response()->json(($request->format)? ['data'=>$book->user] : $book->user);
-        return view('users.show', compact('user'));
+        $user = $book->user;
+        $view = 'users.show';
+        return response()->taker(compact('user', 'view'));
     }
 
 }

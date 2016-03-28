@@ -32,10 +32,9 @@ class UsersController extends Controller
     public function index(Request $request)
     {
         $users = User::paginate(15);
-        
-        if($request->route()->getPrefix() == '/api')
-            return response()->json(($request->format)? ['data'=>$users] : $users);
-        return view('users.index', compact('users'));
+
+        $view = 'users.index';
+        return response()->taker(compact('users', 'view'));
     }
 
     /**
@@ -67,9 +66,8 @@ class UsersController extends Controller
 
         Session::flash('flash_message', 'User added!');
 
-        if($request->route()->getPrefix() == '/api')
-            return response()->json(($request->format)? ['data'=>$user] : $user);
-        return redirect('users');
+        $redirect = 'users';
+        return response()->taker(compact('user', 'redirect'));
     }
 
     /**
@@ -81,9 +79,8 @@ class UsersController extends Controller
      */
     public function show(Request $request, User $user)
     {
-        if($request->route()->getPrefix() == '/api')
-            return response()->json(($request->format)? ['data'=>$user] : $user);
-        return view('users.show', compact('user'));
+        $view = 'users.show';
+        return response()->taker(compact('user', 'view'));
     }
 
     /**
@@ -107,14 +104,7 @@ class UsersController extends Controller
      */
     public function update($id, Request $request)
     {
-        // $this->validate($request, ['username' => 'required', 'email' => 'required', ]);
-
-        // $user = User::findOrFail($id);
-        // $user->update($request->all());
-
-        // Session::flash('flash_message', 'User updated!');
-
-        // return redirect('users');
+        return false;
     }
 
     /**
@@ -126,11 +116,7 @@ class UsersController extends Controller
      */
     public function destroy(Request $request, User $user)
     {
-        // User::destroy($id);
-
-        // Session::flash('flash_message', 'User deleted!');
-
-        // return redirect('users');
+        return false;
     }
 
 }
