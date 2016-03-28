@@ -14,17 +14,19 @@ class ResponseMacroServiceProvider extends ServiceProvider
     public function boot(ResponseFactory $factory)
     {
         $factory->macro('taker', function ($value) use ($factory) {
+            $data = array_diff_key($value, ['view'=>1, 'redirect'=>1]);
             // 取得 API
             if(request()->route()->getPrefix() == '/api') {
-                unset($value['view']);
-                return response()->json((request()->format)? ['data'=>$value] : $value);
+                return $factory->json((request()->format)? ['data'=>$data] : $data);
             }
             // view option
-            if(array_key_exists('view', $value))
-                return $factory->make(view($value['view'], $value));
+            else if(array_key_exists('view', $value)) {
+                return $factory->view($value['view'], $data);
+            }
             // redirect option
-            if(array_key_exists('redirect', $value))
-                return $factory->make(view($value['view'], $value));
+            else if(array_key_exists('redirect', $value)) {
+                return $factory->redirectTo($value['redirect']);
+            }
         });
     }
 

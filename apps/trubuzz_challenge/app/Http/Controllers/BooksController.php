@@ -126,7 +126,7 @@ class BooksController extends Controller
 
         Session::flash('flash_message', 'Book deleted!');
 
-        $success = true
+        $success = true;
         $redirect = 'books';
         return response()->taker(compact('success', 'redirect'));
     }
