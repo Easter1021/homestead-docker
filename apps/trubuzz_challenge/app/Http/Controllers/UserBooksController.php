@@ -23,11 +23,8 @@ class UserBooksController extends Controller
     {
         $books = $user->books()->paginate(15);
 
-        if($request->route()->getPrefix() == '/api')
-            return response()->json(($request->format)? ['data'=>compact('user', 'books')] : compact('user', 'books'));
-
-        $username = $user->username . "'s ";
-        return view('books.index', compact('user', 'books', 'username'));
+        $view = 'books.index';
+        return response()->taker(compact('user', 'books', 'view'));
     }
 
     /**
@@ -43,9 +40,10 @@ class UserBooksController extends Controller
             abort(403, 'Unauthorized action.');
 
         Session::flash('flash_message', ' deleted!');
-        if($request->route()->getPrefix() == '/api')
-            return response()->json(($request->format)? ['data'=>['success'=>true]] : ['success' => true]);
-        return redirect(action('UserBooksController@index', $user));
+
+        $success = true
+        $redirect = action('UserBooksController@index', $user);
+        return response()->taker(compact('success', 'redirect'));
     }
 
 }
