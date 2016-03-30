@@ -13,7 +13,47 @@ curl -sSL https://get.docker.com/ | sh
 curl -L https://github.com/docker/compose/releases/download/1.6.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 ```
 
-## 下載考題/解答環境
+## 考題內容
+1-1 使用 Laravel 建立一個網站，資料庫使用MySQL，其資源有"User"與"Book"兩種：
+
++ User 有 username(unique), email, created_time
++ Book 有 title, description, updated_time, created_time
++ 一個User可以擁有多個Book
+
+1-2 這個網站需要一些API，回傳為格式為json，列表如下：
+
++ 建立User
++ 查詢所有User
++ 查詢個別User
++ 查詢個別User所擁有的Book
++ 為User添加Book
++ 為User移除Book
++ 建立Book
++ 刪除Book
++ 修改Book
++ 查詢所有Book
++ 查詢個別Book
++ 查詢個別Book被誰所擁有
+
+API風格以RESTful為佳
+
+1-3 這些API可以通過指定Accept Header來獲得想要的回傳格式，請讓它可以回傳JSON或HTML。
+
+1-4 這些API在 `?format=True` 且回傳格式為JSON時，需要將原先回傳的資料用`data`包起來，如：
+
+    {
+      "data": {...}
+    }
+
+1-5 如果在API有數十甚至上百的情況下，1-3,1-4的要求怎麼做比較適合？
+
+(optional) 2 增加一個功能讓使用者可以關注其他的使用者，當被關注的使用者添加書目時通知他。
+
+(optional) 3 用`Docker`建立第一題的環境。
+
+(optional) 4 用`Ansible`將網站建立在一台centos的機器上。
+
+## 解答環境
 
 請下載到家目錄
 
