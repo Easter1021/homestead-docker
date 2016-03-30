@@ -1,34 +1,25 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en-us">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta charset="UTF-8">
     <title>TruBuzz Challenge by Easter1021</title>
-
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/github-light.css">
-    <meta name="viewport" content="width=device-width">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>TruBuzz Challenge</h1>
-        <p>Create a  Laravel homestead docker container for your development env.</p>
+    <section class="page-header">
+      <h1 class="project-name">TruBuzz Challenge</h1>
+      <h2 class="project-tagline">Create a  Laravel homestead docker container for your development env.</h2>
+      <a href="https://github.com/Easter1021/homestead-docker" class="btn">View on GitHub</a>
+      <a href="https://github.com/Easter1021/homestead-docker/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/Easter1021/homestead-docker/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-        <p class="view"><a href="https://github.com/Easter1021/homestead-docker">View the Project on GitHub <small>Easter1021/homestead-docker</small></a></p>
-
-
-        <ul>
-          <li><a href="https://github.com/Easter1021/homestead-docker/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/Easter1021/homestead-docker/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/Easter1021/homestead-docker">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h1>
+    <section class="main-content">
+      <h1>
 <a id="trubuzz-challenge" class="anchor" href="#trubuzz-challenge" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>TruBuzz Challenge</h1>
 
 <h2>
@@ -49,7 +40,54 @@
 <div class="highlight highlight-source-shell"><pre>curl -L https://github.com/docker/compose/releases/download/1.6.0/docker-compose-<span class="pl-s"><span class="pl-pds">`</span>uname -s<span class="pl-pds">`</span></span>-<span class="pl-s"><span class="pl-pds">`</span>uname -m<span class="pl-pds">`</span></span> <span class="pl-k">&gt;</span> /usr/local/bin/docker-compose</pre></div>
 
 <h2>
-<a id="下載考題解答環境" class="anchor" href="#%E4%B8%8B%E8%BC%89%E8%80%83%E9%A1%8C%E8%A7%A3%E7%AD%94%E7%92%B0%E5%A2%83" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>下載考題/解答環境</h2>
+<a id="考題內容" class="anchor" href="#%E8%80%83%E9%A1%8C%E5%85%A7%E5%AE%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>考題內容</h2>
+
+<p>1-1 使用 Laravel 建立一個網站，資料庫使用MySQL，其資源有"User"與"Book"兩種：</p>
+
+<ul>
+<li>User 有 username(unique), email, created_time</li>
+<li>Book 有 title, description, updated_time, created_time</li>
+<li>一個User可以擁有多個Book</li>
+</ul>
+
+<p>1-2 這個網站需要一些API，回傳為格式為json，列表如下：</p>
+
+<ul>
+<li>建立User</li>
+<li>查詢所有User</li>
+<li>查詢個別User</li>
+<li>查詢個別User所擁有的Book</li>
+<li>為User添加Book</li>
+<li>為User移除Book</li>
+<li>建立Book</li>
+<li>刪除Book</li>
+<li>修改Book</li>
+<li>查詢所有Book</li>
+<li>查詢個別Book</li>
+<li>查詢個別Book被誰所擁有</li>
+</ul>
+
+<p>API風格以RESTful為佳</p>
+
+<p>1-3 這些API可以通過指定Accept Header來獲得想要的回傳格式，請讓它可以回傳JSON或HTML。</p>
+
+<p>1-4 這些API在 <code>?format=True</code> 且回傳格式為JSON時，需要將原先回傳的資料用<code>data</code>包起來，如：</p>
+
+<pre><code>{
+  "data": {...}
+}
+</code></pre>
+
+<p>1-5 如果在API有數十甚至上百的情況下，1-3,1-4的要求怎麼做比較適合？</p>
+
+<p>(optional) 2 增加一個功能讓使用者可以關注其他的使用者，當被關注的使用者添加書目時通知他。</p>
+
+<p>(optional) 3 用<code>Docker</code>建立第一題的環境。</p>
+
+<p>(optional) 4 用<code>Ansible</code>將網站建立在一台centos的機器上。</p>
+
+<h2>
+<a id="解答環境" class="anchor" href="#%E8%A7%A3%E7%AD%94%E7%92%B0%E5%A2%83" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>解答環境</h2>
 
 <p>請下載到家目錄</p>
 
@@ -294,13 +332,15 @@ curl -X POST http://trubuzz.challenge.<span class="pl-c1">test</span>:8000/users
 <p>本次依照 git flow 的標準來管理版本，請參照下圖：</p>
 
 <p><img src="https://raw.githubusercontent.com/Easter1021/homestead-docker/master/images/git-model@2x.png" alt="git flow best practice"></p>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/Easter1021">Easter1021</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/Easter1021/homestead-docker">TruBuzz Challenge</a> is maintained by <a href="https://github.com/Easter1021">Easter1021</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
-    </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
+
+    </section>
+
+  
   </body>
 </html>
